@@ -1,16 +1,16 @@
-import * as model from './model';
-import icon from './views/iconsView';
-import recipeView from './views/recipeView';
-import searchView from './views/searchView';
-import resultsView from './views/resultsView';
-import bookmarksView from './views/bookmarksView';
-import paginationView from './views/paginationView';
-import addRecipeView from './views/addRecipeView';
-import { MODAL_CLOSE_TIMER } from './config';
+import * as model from "./model";
+import icon from "./views/iconsView";
+import recipeView from "./views/recipeView";
+import searchView from "./views/searchView";
+import resultsView from "./views/resultsView";
+import bookmarksView from "./views/bookmarksView";
+import paginationView from "./views/paginationView";
+import addRecipeView from "./views/addRecipeView";
+import { MODAL_CLOSE_TIMER } from "./config";
 
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-import { async } from 'regenerator-runtime/runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import { async } from "regenerator-runtime/runtime";
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -35,7 +35,7 @@ const controlRecipes = async function () {
     await model.loadRecipe(id);
     const { recipe } = model.state;
     recipeView.render(recipe);
-  } catch (e) 
+  } catch (e) {
     recipeView.renderError(e);
   }
 };
@@ -58,7 +58,7 @@ const controlSearch = async function () {
     paginationView.render(model.state.search);
 
     if (model.state.search.query && !model.state.search.results.length) {
-      return resultsView.renderError('Результат поиска пуст');
+      return resultsView.renderError("Результат поиска пуст");
     }
   } catch (e) {
     console.log(`error`, e);
@@ -87,13 +87,17 @@ const controlAddBookmark = function () {
   bookmarksView.render(model.state.bookmarks);
 
   if (model.state.bookmarks.length === 0)
-    bookmarksView.renderMessage('Пока нет закладок. Выберите понравившейся рецепт и добавьте его');
+    bookmarksView.renderMessage(
+      "Пока нет закладок. Выберите понравившейся рецепт и добавьте его"
+    );
 };
 
 const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
   if (model.state.bookmarks.length === 0)
-    bookmarksView.renderMessage('Пока нет закладок. Выберите понравившейся рецепт и добавьте его');
+    bookmarksView.renderMessage(
+      "Пока нет закладок. Выберите понравившейся рецепт и добавьте его"
+    );
 };
 
 const controlAddRecipe = async function (newRecipe) {
@@ -106,7 +110,7 @@ const controlAddRecipe = async function (newRecipe) {
 
     bookmarksView.render(model.state.bookmarks);
 
-    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+    window.history.pushState(null, "", `#${model.state.recipe.id}`);
   } catch (e) {
     console.log(`error`, e);
     addRecipeView.renderError(e.message);
