@@ -35,9 +35,7 @@ const controlRecipes = async function () {
     await model.loadRecipe(id);
     const { recipe } = model.state;
     recipeView.render(recipe);
-  } catch (e) {
-    console.log(``);
-
+  } catch (e) 
     recipeView.renderError(e);
   }
 };
@@ -63,8 +61,7 @@ const controlSearch = async function () {
       return resultsView.renderError('Результат поиска пуст');
     }
   } catch (e) {
-    console.log(`error`);
-    console.log(`e`, e);
+    console.log(`error`, e);
   }
 };
 
@@ -111,7 +108,7 @@ const controlAddRecipe = async function (newRecipe) {
 
     window.history.pushState(null, '', `#${model.state.recipe.id}`);
   } catch (e) {
-    console.log(`e`, e);
+    console.log(`error`, e);
     addRecipeView.renderError(e.message);
   }
 };
